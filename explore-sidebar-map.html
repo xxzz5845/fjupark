@@ -1,0 +1,112 @@
+<!doctype html>
+
+
+<html lang="en" class="no-js">
+<head>
+	<title>FJU EZParking</title>
+
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<link rel="stylesheet" href="css/triptip-assets.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+	<!-- Container -->
+	<div id="container">
+		<!-- Header
+		    ================================================== -->
+		<header class="clearfix white-header-style fullwidth-with-search">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+
+					<a class="navbar-brand" href="index.html">
+						<img src="images/logo-black.png" alt="">
+					</a>
+
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						
+
+						<ul class="navbar-nav ml-auto right-list">
+							<a href="" onclick="logout()" class="add-list-btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> 登出</a>
+						</ul>
+						
+					</div>
+				</div>
+			</nav>
+		</header>
+		<!-- End Header -->
+
+		<!-- explore-module
+			================================================== -->
+		<section class="explore">
+
+
+
+			<div class="explore__map-side">
+				<!-- map block
+				================================================== -->
+				<div id="map" data-map-zoom="9"></div>
+				<!-- End map block -->
+			</div>	
+
+		</section>
+		<!-- End explore-module -->
+
+	</div>
+	<!-- End Container -->
+	<script src="js/firebase-app.js"></script>
+	<script src="js/firebase-auth.js"></script>
+	<script src="js/firebase-firestore.js"></script>
+	<script src="js/database.js"></script>
+	<script>
+		firebase.auth().onAuthStateChanged(function(user) {
+  			if (user) {
+    			// User is signed in.
+				console.log(user)
+				if(user.emailVerified === false){
+					alert('請先驗證信箱!');
+				}
+  			} else {
+    			// No user is signed in.
+				alert('請先登入或註冊方可使用本系統!');
+				window.location.href="sign-page.html";
+  			}
+		});
+		function logout(){
+			firebase.auth().signOut();
+			window.location.href="sign-page.html";
+		}
+	</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.migrate.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf4zwvJZw4RbFvEROgtDa6j8p_MW_P3eg"></script>
+	<!--build:js js/triptip-plugins.min.js -->
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="js/jquery.imagesloaded.min.js"></script>
+  	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/retina-1.1.0.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/infobox.min.js"></script>
+	<script src="js/markerclusterer.js"></script>
+	<script src="js/maps.js"></script>
+	<!-- endbuild -->
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/script.js"></script>
+	
+</body>
+</html>

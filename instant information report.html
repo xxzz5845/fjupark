@@ -1,0 +1,176 @@
+<!doctype html>
+
+
+<html lang="en" class="no-js">
+<head>
+	<title>Triptip</title>
+
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<link rel="stylesheet" href="css/triptip-assets.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+	<!-- Container -->
+	<div id="container">
+		<!-- Header
+		    ================================================== -->
+			<header class="clearfix white-header-style fullwidth-with-search">
+
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="container-fluid">
+	
+						<a class="navbar-brand" href="index.html">
+							<img src="images/logo-black.png" alt="">
+						</a>
+	
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+	
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							
+	
+							<ul class="navbar-nav ml-auto right-list">
+								<a href="" onclick="logout()" class="add-list-btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> 登出</a>
+							</ul>
+							
+						</div>
+					</div>
+				</nav>
+			</header>
+		<!-- End Header -->
+
+		<!-- add-listing
+			================================================== -->
+		<section class="add-listing">
+			<div class="add-listing__title-box">
+				<div class="container">
+					<h1 class="add-listing__title">
+						即時資訊回報
+					</h1>
+				</div>
+			</div>
+
+		
+			<form class="add-listing__form">
+
+				<div class="container">
+					
+					<!-- form box -->
+					<div class="add-listing__form-box element-waypoint" id="general-info">
+
+						<h2 class="add-listing__form-title">
+							回報停車場:
+						</h2>
+
+						<div class="add-listing__form-content">
+							<div class="row">
+								
+								<div class="col-md-6">
+									
+									<select class="add-listing__input js-example-basic-multiple" name="category" id="category" >
+										<option>前門停車場</option>
+										<option>514巷(中段)</option>
+										<option selected>法藍停車場</option>
+										<option>貴子路1</option>
+										<option>貴子路2</option>
+										<option>輔大診所前</option>
+										<option>輔大醫院地下</option>
+									</select>
+								</div>
+							</div>
+							
+							
+							
+						</div>
+
+					</div>
+					
+                    <!-- form box -->
+					<div class="add-listing__form-box element-waypoint" id="gallery-box">
+
+						<h2 class="add-listing__form-title">
+							即時照片與回報:
+						</h2>
+
+						<div class="add-listing__form-content">
+							<div class="add-listing__input-file-box">
+								<input class="add-listing__input-file" type="file" name="file" id="file"/>
+								<div class="add-listing__input-file-wrap">
+									<i class="la la-cloud-upload"></i>
+									<p>點擊上傳停車場照片</p>
+								</div>
+							</div>							
+						</div>
+                        
+                        <div class="col-md-4">
+                            <label class="add-listing__label" for="city">
+                                空位狀況:
+                            </label>
+                            <select class="add-listing__input js-example-basic-multiple" name="city" id="city">
+                                <option>空位充足 </option>
+                                <option>尚有空位</option>
+                                <option>稍微擁擠</option>
+                                <option>瀕臨滿位</option>
+                                <option>已滿</option>
+                            </select>
+                        </div>
+                        <br>
+                        <label class="add-listing__label" for="description">
+                         文字補充:
+                        </label>
+                        <textarea class="add-listing__textarea" name="description" id="description" placeholder="Describe the listing"></textarea>
+					</div>
+					
+					<!-- form box -->
+					<!-- form box -->
+					
+					
+					
+					<div class="center-button">
+						<button class="add-listing__submit" type="submit">
+							<i class="fa fa-paper-plane" aria-hidden="true"></i>
+							提交回報
+						</button>
+					</div>
+
+				</div>
+
+			</form>
+		</section>
+		<!-- End add-listing -->
+
+
+
+	</div>
+	<!-- End Container -->
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.migrate.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqrIen8rWQrvJsu-7f4rOta0fmI5r2SI"></script>
+	<!--build:js js/triptip-plugins.min.js -->
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="js/jquery.imagesloaded.min.js"></script>
+  	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/retina-1.1.0.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/infobox.min.js"></script>
+	<script src="js/markerclusterer.js"></script>
+	<script src="js/maps.js"></script>
+	<!-- endbuild -->
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/script.js"></script>
+	
+</body>
+</html>

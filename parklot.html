@@ -1,0 +1,207 @@
+<!doctype html>
+
+
+<html lang="en" class="no-js">
+<head>
+	<title>停車場即時資訊</title>
+
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<link rel="stylesheet" href="css/triptip-assets.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>	
+	<!-- Container -->
+	<div id="container">
+		<!-- Header
+		    ================================================== -->
+		<header class="clearfix white-header-style fullwidth-with-search">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+
+					<a class="navbar-brand" href="index.html">
+						<img src="images/logo-black.png" alt="">
+					</a>
+
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					
+						<ul class="navbar-nav ml-auto right-list">
+							<li><a onclick="logout()"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 登出</a></li>
+						</ul>
+						<a href="add-listing.html" class="add-list-btn btn-default"><i class="fa fa-user-o" aria-hidden="true"></i> 個人頁面</a>
+					</div>
+				</div>
+			</nav>
+        </header>
+        
+		<!-- End Header -->
+
+		<!-- user-detail
+			================================================== -->
+		<section class="user-detail">
+            <br>
+			<div class="user-detail__profile">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-5">
+							<div class="user-detail__profile-box">
+								<h3 class="user-detail__profile-title">
+									<a href="#" id="pl_s"></a>
+									<span class="user-detail__profile-location" >
+										<i class="fa fa-map-marker" id="pl_name"></i>
+										
+									</span>
+									
+								</h3>
+								
+							</div>
+							<br>
+							<input class="contact-form__submit" type="submit" name="submit-contact" id="submit_contact" value="即時照片" />
+						</div>	
+					
+				</div>
+				<br><br>
+				<div class="sidebar__widget sidebar__advertise">
+					
+					<img id = "pl_photo" alt="">
+				</div>
+				<br>
+				<!-- 資訊顯示 -->
+				<div class="other-posts">
+					<a class="other-posts__prev" href="#">
+						<div class="other-posts__prev-box">
+							<span class="other-posts__desc">空位狀態</span>
+							<h2 class="other-posts__title">
+								<span style="color:green" id="pl_s"></span>
+								
+							</h2>
+							
+							<span class="place-post__description-review">
+								 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								 更新時間: 2021/05/13 09:40
+							</span>
+						</div>
+					</a>
+					<br><br>
+					<a class="other-posts__prev" href="#">
+						<div class="other-posts__next-box">
+							<span class="other-posts__desc">停車場設施</span>
+							<h2 class="other-posts__title" id="pl_ft">
+				
+							</h2>
+						</div>
+					</a>
+					<br>
+					<input onclick="go_comment()"class="contact-form__submit" type="button" name="submit-contact" id="check_commemt" value="查看評論" />
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<input onclick="window.location.href='instant information report.html?pl_id='" class="contact-form__submit" type="button" name="submit-contact" id="report" value="即時回報" />
+				<!-- 資訊顯示結束 -->
+				
+			</div>
+
+			
+
+			
+			
+						
+					
+						
+				
+			
+		</section>
+		<!-- End user-detail -->
+
+		
+
+	</div>
+	<!-- End Container -->
+	<script src="js/firebase-app.js"></script>
+	<script src="js/firebase-auth.js"></script>
+	<script src="js/firebase-firestore.js"></script>
+	<script src="js/database.js"></script>
+	<script>
+		var getUrlString = location.href;
+		var url = new URL(getUrlString);
+		var pl_id = url.searchParams.get('p_id');
+		var pl_name = document.getElementById('pl_name');
+		var photo = document.getElementById('pl_photo');
+		function go_comment(){
+			window.location.href="comment.html?pl_id=" + pl_id;
+		}
+		db.collection("parking_lot").where("pl_id", "==", pl_id)
+    		.get()
+    		.then((querySnapshot) => {
+      			querySnapshot.forEach((doc) => {
+      			// doc.data() is never undefined for query doc snapshots
+      			console.log(doc.id, " => ", doc.data());
+				pl_name.textContent = doc.data()['pl_name'] + '即時資訊';
+				photo.src = doc.data()['pl_pic'];
+				var pl_s = doc.data()['pl_situation'];
+				var pl_stext = document.getElementById('pl_s');
+				if(pl_s === 0){
+					pl_stext.innerHTML = "空位充足";
+				}else if(pl_s === 1){
+					pl_stext.innerHTML = "尚有空位";
+				}else if(pl_s === 2){
+					pl_stext.innerHTML = "稍微擁擠";
+					pl_stext.style.color = "#FFD306";
+				}else if(pl_s === 3){
+					pl_stext.innerHTML = "瀕臨滿位";
+					pl_stext.style.color = "#F75000";
+				}else if(pl_s === 4){
+					pl_stext.innerHTML = "已滿";
+					pl_stext.style.color = "#EA0000";
+				}
+				var pl_f = doc.data()['pl_facility'];
+				var pl_ft =''
+				for (i= 0; i < pl_f.length; i++){
+					pl_ft = pl_ft + " " +pl_f[i];
+				}
+				if(pl_ft === ''){
+					document.getElementById('pl_ft').textContent = "無設施";
+				}else{
+					document.getElementById('pl_ft').textContent = pl_ft;
+				}
+				
+      		});
+    		}).catch((error) => {
+      			console.log("Error getting documents: ", error);
+    	});
+		function logout(){
+			firebase.auth().signOut();
+			window.location.href="sign-page.html";
+		};
+	</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.migrate.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqrIen8rWQrvJsu-7f4rOta0fmI5r2SI"></script>
+	<!--build:js js/triptip-plugins.min.js -->
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="js/jquery.imagesloaded.min.js"></script>
+  	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/retina-1.1.0.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/infobox.min.js"></script>
+	<script src="js/markerclusterer.js"></script>
+	<script src="js/maps.js"></script>
+	<!-- endbuild -->
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/script.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+
+
+<html lang="en" class="no-js">
+<head>
+	<title>Triptip</title>
+
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<link rel="stylesheet" href="css/triptip-assets.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+	<!-- Container -->
+	<div id="container">
+		<!-- Header
+		    ================================================== -->
+			<header class="clearfix white-header-style fullwidth-with-search">
+
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="container-fluid">
+	
+						<a class="navbar-brand" href="index.html">
+							<img src="images/logo-black.png" alt="">
+						</a>
+	
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+	
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							
+	
+							<ul class="navbar-nav ml-auto right-list">
+								<a href="" onclick="logout()" class="add-list-btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> 登出</a>
+							</ul>
+							
+						</div>
+					</div>
+				</nav>
+			</header>
+		<!-- End Header -->
+
+		<!-- page-title-module
+			================================================== -->
+		<section class="page-title">
+			<div class="container">
+				<h1 class="page-title__title">評論</h1>
+			</div>
+		</section>
+		<!-- End page-title-module -->
+
+		<!-- blog-page block
+			================================================== -->
+		<section class="blog-page">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="blog-page__box">
+									
+
+
+								<!-- 評論內容 -->
+								<div class="comments">
+									<ul class="comments__list" id="comments__list">
+
+									</ul>
+								</div>
+								<!-- 評論內容 -->
+
+								<!-- 撰寫評論開始 -->
+                                <form class="contact-form" id="leave-review">
+                                    <h2 class="contact-form__title">
+                                        撰寫評論
+                                    </h2>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="contact-form__rate">
+                                                推薦指數:
+                                            </p>
+                                            <p class="contact-form__rate-bx">
+                                                <i class="la la-star"></i>
+                                                <i class="la la-star"></i>
+                                                <i class="la la-star"></i>
+                                                <i class="la la-star"></i>
+                                                <i class="la la-star"></i>
+                                            </p>
+                                            <p class="contact-form__rate-bx-show">
+                                                <span class="rate-actual" id="rate-actual">0</span> / 5
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <input disabled class="contact-form__input-text" type="text" name="mail" id="username">
+                                        </div>
+                                    </div>
+                                    <textarea class="contact-form__textarea" name="comment" id="comment" placeholder="請說明你在這裡的親身體驗"></textarea>
+                                    <input onclick="add()" class="contact-form__submit" type="button" name="submit-contact" id="submit_contact" value="提交評論" />
+                                </form>
+                                <!-- 撰寫評論結束 -->
+
+							</div>
+							<!-- End single-post module -->
+
+						</div>
+					</div>
+					<div class="col-lg-4">
+
+						
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End blog-page block -->
+
+		
+
+	</div>
+	<!-- End Container -->
+	<script src="js/firebase-app.js"></script>
+	<script src="js/firebase-auth.js"></script>
+	<script src="js/firebase-firestore.js"></script>
+	<script src="js/database.js"></script>
+	<script>
+		var getUrlString = location.href;
+		var url = new URL(getUrlString);
+		var pl_id = url.searchParams.get('pl_id');
+		firebase.auth().onAuthStateChanged(function(user) {
+  			if (user) {
+    			// User is signed in.
+				console.log(user)
+				if(user.emailVerified === false){
+					alert('請先驗證信箱!');
+					window.location.href="sign-page.html";
+				}else{
+					document.getElementById("username").value = user.displayName;
+				}
+  			} else {
+    			// No user is signed in.
+				alert('請先登入或註冊方可使用本系統!');
+				window.location.href="sign-page.html";
+  			}
+		});
+		var comment  = document.getElementById('comments__list');
+		var comment_text = '';
+		db.collection("comment").where("c_place", "==", pl_id)
+    		.get()
+    		.then((querySnapshot) => {
+      			querySnapshot.forEach((doc) => {
+      			// doc.data() is never undefined for query doc snapshots
+      			console.log(doc.id, " => ", doc.data());
+				comment_text = comment_text + "<li class='comments__list-item'><img class='comments__list-item-image' src='upload/default.png' alt=''><div class='comments__list-item-content'><h3 class='comments__list-item-title'>"+ doc.data()['c_account'] +"</h3><span class='reviews-list__item-rating'>"+ doc.data()['c_star'] +"</span><span class='comments__list-item-date'>"+ doc.data()['c_time'] +"</span><p class='comments__list-item-description'>"+ doc.data()['c_text'] +"</p></div></li>";
+      		});
+			  	if(comment_text === ''){
+					comment.innerHTML = "<p>尚無評論</p>"
+			  	}else{
+					comment.innerHTML = comment_text;
+				  }
+		}).catch((error) => {
+				console.log(error);
+    	});
+		
+		function add(){
+			var Today=new Date();
+			var star = document.getElementById('rate-actual').innerText;
+			var comment_content = document.getElementById('comment').value;
+			if (star === '0'){
+				alert('評論星數不得為0!')
+				return
+			}
+			if (comment_content === ''){
+				alert('評論不得為空!')
+				return
+			}
+			db.collection("comment").add({
+    			c_account: document.getElementById("username").value,
+    			c_picture: "",
+    			c_place: pl_id,
+    			c_star: star + ".0",
+    			c_text: comment_content,
+    			c_time: Today.getFullYear()+ "/" + (Today.getMonth()+1) + "/" + Today.getDate()
+  			}).then((docRef) => {
+    			console.log("Document written with ID: ", docRef.id);
+				alert('評論成功!')
+				window.location.reload();
+  			}).catch((error) => {
+    			console.error("Error adding document: ", error);
+			});
+		};
+	</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.migrate.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqrIen8rWQrvJsu-7f4rOta0fmI5r2SI"></script>
+	<!--build:js js/triptip-plugins.min.js -->
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="js/jquery.imagesloaded.min.js"></script>
+  	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/retina-1.1.0.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/infobox.min.js"></script>    
+	<script src="js/markerclusterer.js"></script>hop su3
+	<script src="js/maps.js"></script>
+	<!-- endbuild -->
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/script.js"></script>
+	
+	
+</body>
+</html>

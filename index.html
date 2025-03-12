@@ -1,0 +1,302 @@
+<!doctype html>
+
+
+<html lang="en" class="no-js">
+<head>
+	<title>輔仁大學機車即時資訊系統-登入</title>
+
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<link rel="stylesheet" href="css/triptip-assets.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+	<!-- Container -->
+	<div id="container">
+		<!-- Header
+		    ================================================== -->
+		<header class="clearfix white-header-style fullwidth-with-search">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+
+					<a class="navbar-brand" href="index.html">
+						<img src="images/logo-black.png" alt="">
+					</a>
+				</div>
+			</nav>
+		</header>
+		<!-- End Header -->
+
+		<!-- sign-block
+			================================================== -->
+		<section class="sign">
+			<div class="sign__area">
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-sign-tab" data-toggle="tab" href="#nav-sign" role="tab" aria-controls="nav-sign" aria-selected="true">登入</a>
+						<a class="nav-item nav-link" id="nav-register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-register" aria-selected="false">註冊</a>
+					</div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-sign" role="tabpanel" aria-labelledby="nav-sign-tab">
+
+						<!-- sign-form-module -->
+						<form class="sign-form">
+							<label class="sign-form__label" for="username">
+								電子郵件:
+							</label>
+							<input class="sign-form__input-text" type="text" name="username" id="username" placeholder="輸入電子郵件" />
+							<p style="color: red;" id="mail_err"></p>
+							<label class="sign-form__label" for="password">
+								密碼:
+							</label>
+							<input class="sign-form__input-text" type="password" name="password" id="password" placeholder="輸入密碼" />
+							<p style="color: red;" id="pass_err"></p>
+							<div class="sign-form__checkbox">
+								<input class="sign-form__input-checkbox" type="checkbox" name="rememb-check" id="rememb-check"/>
+								<span class="sign-form__checkbox-style"></span>
+								<span class="sign-form__checkbox-text">記住我</span>
+							</div>
+							<a class="sign-form__forget-link" href="#">忘記密碼?</a>
+							
+							<button  class="sign-form__submit" id="submit-loggin" type="button" onclick="loggin()">
+								<i class="fa fa-sign-in" aria-hidden="true"></i>
+								登入
+							</button>
+							<br>
+							<p class="sign-form__text">
+								其他登入
+							</p>
+							<ul class="sign-form__social">
+								<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#" class="google"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+							</ul>
+						</form>
+
+						<!-- End sign-form-module -->
+
+					</div>
+					<div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+
+
+						<!-- sign-form-module -->
+						<form class="sign-form">
+							<label class="sign-form__label" for="email">
+								電子郵件:
+							</label>
+							<input class="sign-form__input-text" type="email" name="email" id="email" placeholder="輸入電子郵件" />
+							<p style="color: red;" id="mail_err2"></p>
+							<label class="sign-form__label" for="password2">
+								密碼:
+							</label>
+							<input class="sign-form__input-text" type="password" name="password2" id="password2" placeholder="密碼" />
+							<p style="color: red;" id="pass_err2"></p>
+							<label class="sign-form__label" for="con-password2">
+								確認密碼:
+							</label>
+							<input class="sign-form__input-text" type="password" name="con-password2" id="con-password2" placeholder="確認密碼" />
+							<p style="color: red;" id="pass_err3"></p>
+							<label class="sign-form__label" for="realname">
+								真實姓名:
+							</label>
+							<input class="sign-form__input-text" type="text" name="realname" id="realname" placeholder="輸入您的姓名" />
+							<p style="color: red;" id="name_err"></p>
+							<label class="sign-form__label" for="username2">
+								暱稱(將用於評論與回報):
+							</label>
+							<input class="sign-form__input-text" type="text" name="nickname" id="nickname" placeholder="輸入您的暱稱" />
+							<p style="color: red;" id="nickname_err"></p>
+							<div class="sign-form__checkbox">
+								<input class="sign-form__input-checkbox" type="checkbox" name="rememb-check2" id="rememb-check2"/>
+								<span class="sign-form__checkbox-style"></span>
+								<span class="sign-form__checkbox-text">我已詳閱並接受<a href="privacy policy.html" target="_blank">隱私權與資料政策</a></span>
+							</div>
+							<p style="color: red;" id="policy_err"></p>
+							<button  class="sign-form__submit" type="button" id="submit_signup" onclick="signup()">
+								<i class="fa fa-sign-in" aria-hidden="true"></i>
+								註冊
+							</button>
+							<p class="sign-form__text">
+								其他註冊
+							</p>
+							<ul class="sign-form__social">
+								<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#" class="google"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+							</ul>
+						</form>
+
+						<!-- End sign-form-module -->
+					</div>
+				</div>
+			</div>
+
+		</section>
+		<!-- End sign-block -->
+
+	</div>
+	<!-- End Container -->
+	<script src="js/firebase-app.js"></script>
+	<script src="js/firebase-auth.js"></script>
+	<script src="js/firebase-firestore.js"></script>
+	<script src="js/database.js"></script>
+	<script>
+		var user = firebase.auth().currentUser;
+		console.log(user);
+		var name, email, photoUrl, uid, emailVerified;
+		if (user != null) {
+  			name = user.displayName;
+  			email = user.email;
+  			photoUrl = user.photoURL;
+  			emailVerified = user.emailVerified;
+  			uid = user.uid;
+		};
+		function loggin(){
+			var check = 0;
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+			document.getElementById('mail_err').textContent = '';
+			document.getElementById('pass_err').textContent = '';
+			const containsUpperCase = str => str != str.toLowerCase();
+			if (username.indexOf('@') === -1 || username.indexOf('.') === -1){
+				document.getElementById('mail_err').textContent = '電子郵件格式錯誤，請檢查!';
+				check = 1;	
+			};
+			if (password.length < 6){
+				document.getElementById('pass_err').textContent = '密碼長度需大於六位元!';	
+				check = 1;			
+			}else if(containsUpperCase(password) === false){
+				document.getElementById('pass_err').textContent = '密碼須至少包含一大寫字母!';
+				check = 1;	
+			};
+
+			if(check === 0){
+				firebase.auth().signInWithEmailAndPassword(username, password)
+  					.then((userCredential) => {
+						var user = userCredential.user;
+						console.log(user);
+						alert(user.displayName + '，歡迎回來!');
+						window.location.href="explore-sidebar-map.html";
+  					})
+  					.catch((error) => {
+						if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found"){
+							alert('帳號或密碼錯誤!');
+						};
+						console.log(error.code);
+  					});
+			};
+		};
+		function signup(){
+			var check = 0;
+			var email = document.getElementById('email').value;
+			var password = document.getElementById('password2').value;
+			var password_check = document.getElementById('con-password2').value;
+			var realname = document.getElementById('realname').value;
+			var nickname = document.getElementById('nickname').value;
+			var policy_check = document.getElementById('rememb-check2');
+			const containsUpperCase = str => str != str.toLowerCase();
+			if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
+				document.getElementById('mail_err2').textContent = '電子郵件格式錯誤，請檢查!';
+				check = 1;	
+			}
+			if (password.length < 6){
+				document.getElementById('pass_err2').textContent = '密碼長度需大於六位元!';	
+				check = 1;			
+			}else if(containsUpperCase(password) === false){
+				document.getElementById('pass_err2').textContent = '密碼須至少包含一大寫字母!';
+				check = 1;	
+			}
+			if(password != password_check){
+				document.getElementById('pass_err3').textContent = '密碼須至少包含一大寫字母!';
+				check = 1;
+			}
+			if(realname === ''){
+				document.getElementById('name_err').textContent = '真實姓名不得為空!';
+				check = 1;
+			}
+			if(nickname === ''){
+				document.getElementById('nickname_err').textContent = '暱稱不得為空!';
+				check = 1;
+			}
+			if(policy_check.checked == false){
+				document.getElementById('policy_err').textContent = '請先勾選隱私權政策。';
+				check = 1;
+			}
+			if(check === 0){
+				firebase.auth().createUserWithEmailAndPassword(email, password)
+					.then(function(result) {
+						create_account(email, realname, nickname);
+						verify_email();
+  						return result.user.updateProfile({
+    					displayName: nickname
+  					})
+					}).catch(function(error) {
+  						console.log(error);
+						if(error.code === "auth/email-already-in-use"){
+							document.getElementById('mail_err2').textContent = '此信箱已被註冊，請更換後重試!';
+						}else if(error.code === "auth/invalid-email"){
+							document.getElementById('mail_err2').textContent = '信箱格式錯誤，請檢查!';
+						}
+					});
+			}
+		};
+		function create_account(email, realname, nickname){
+			const dateTime = Date.now();
+			const timestamp = Math.floor(dateTime / 1000);
+			db.collection("account").add({
+    			email: email,
+    			nickname: nickname,
+    			real_name: realname,
+    			a_status: "True",
+    			sub: "False",
+				r_time: 0,
+				i_success: 0,
+				warn: 0,
+				a_point: 0,
+				a_admin: 'user',
+				a_avatar: '',
+				a_time: timestamp,
+  				}).then((docRef) => {
+    				console.log("Document written with ID: ", docRef.id);
+  				}).catch((error) => {
+    				console.error("Error adding document: ", error);
+				});
+		};
+		function verify_email(){
+			console.log(firebase.auth().currentUser);
+			firebase.auth().currentUser.sendEmailVerification()
+  			.then(function() {
+    			alert('註冊成功!請至信箱收取驗證信。');
+  			}).catch(function(error) {
+    			console.log(error);
+  			});
+		};
+	</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.migrate.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqrIen8rWQrvJsu-7f4rOta0fmI5r2SI"></script>
+	<!--build:js js/triptip-plugins.min.js -->
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="js/jquery.imagesloaded.min.js"></script>
+  	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/retina-1.1.0.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/infobox.min.js"></script>    
+	<script src="js/markerclusterer.js"></script>hop su3
+	<script src="js/maps.js"></script>
+	<!-- endbuild -->
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/script.js"></script>
+	
+</body>
+</html>
